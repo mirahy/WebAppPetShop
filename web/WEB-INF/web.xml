@@ -29,7 +29,7 @@
     </session-config>
     
     <welcome-file-list>
-        <welcome-file>faces/Layout.xhtml</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     
     <mime-mapping>

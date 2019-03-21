@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="WEB-INF/template/Layout.xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="conteudo">
+        <h:form>
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Novo"
+                                     icon="ui-icon-document"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical"/>
+                    </span>
+                    <p:commandButton icon="ui-icon-pencil"
+                                     title="Editar"/>
+                    <p:commandButton icon="ui-icon-trash"
+                                     title="Excluir"/>
+                </f:facet> 
+            </p:toolbar>
+            <br/>
+            <p:dataTable value="#{[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}"
+                         emptyMessage="Nenhum cliente localizado"
+                         rows="10"  paginator="true"
+                         paginatorPosition="bottom">
+                <p:column headerText="ID">
+                    <h:outputText value="789"/>
+                </p:column>
+                <p:column headerText="NOME">
+                    <h:outputText value="Mirahy Fonseca"/>
+                </p:column>
+            </p:dataTable>  
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

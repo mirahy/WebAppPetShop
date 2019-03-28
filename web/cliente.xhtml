@@ -14,7 +14,8 @@
             <p:toolbar>
                 <f:facet name="left">
                     <p:commandButton value="Novo"
-                                     icon="ui-icon-document"/>
+                                     icon="ui-icon-document"
+                                     onclick="PF('edicaoClienteDialog').show()"/>
                     <span class="ui-separator">
                         <span class="ui-icon ui-icon-grip-dotted-vertical"/>
                     </span>
@@ -25,15 +26,43 @@
                 </f:facet> 
             </p:toolbar>
             <br/>
-            <p:dataTable value="#{[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}"
+            
+            <p:dialog header="Clientes"
+                      widgetVar="edicaoClienteDialog"
+                      id="cliente-dialog"
+                      resizable="fase" modal="true"
+                      closeOnEscape="true">
+
+            
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Nome" for="nome" />
+                <p:inputText id="nome" />
+                <p:outputLabel value="RG" for="rg" />
+                <p:inputText id="rg" />
+                <p:outputLabel value="CPF" for="cpf" />
+                <p:inputMask mask="999.999.999-99" id="cpf" />
+                <p:outputLabel value="Telefone" for="telefone" />
+                <p:inputMask mask="(99) 99999-9999" id="telefone" />
+                <p:outputLabel value="E-mail" for="email" />
+                <p:inputText id="email" />
+                <p:outputLabel value="Endereço" for="endereco" />
+                <p:inputText id="endereco" />
+                <h:outputLabel />
+                <p:commandButton value="Salvar" />
+            </h:panelGrid>
+                
+            </p:dialog>
+                
+            <br />
+            <p:dataTable value="#{clienteBean.clientes}" var="cliente"
                          emptyMessage="Nenhum cliente localizado"
                          rows="10"  paginator="true"
                          paginatorPosition="bottom">
                 <p:column headerText="ID">
-                    <h:outputText value="789"/>
+                    <h:outputText value="#{cliente.id}"/>
                 </p:column>
                 <p:column headerText="NOME">
-                    <h:outputText value="Mirahy Fonseca"/>
+                    <h:outputText value="#{cliente.nome}"/>
                 </p:column>
             </p:dataTable>  
         </h:form>

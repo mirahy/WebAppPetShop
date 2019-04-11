@@ -9,8 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Criteria;
 
 public class DAO<T> {
-    //private final JPAUtil factoty = new JPAUtil();
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("frameworks");
+    private final JPAUtil factoty = new JPAUtil();
     private final Class<T> classe;
 
     public DAO(Class<T> classe) {
@@ -18,8 +17,7 @@ public class DAO<T> {
     }
     
     public  List<T> listaTodos(){
-        //EntityManager em = factoty.getEntityManager();
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = factoty.getEntityManager();
         CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
         query.select(query.from(classe));
         

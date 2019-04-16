@@ -2,11 +2,13 @@
 package br.com.petshop.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +29,9 @@ public class Cliente implements Serializable {
     private String email;
     @Column(name = "endereco")
     private String endereco;
-
+    
+    @OneToMany(mappedBy = "propietario")
+    private List<Animal> animais;
     
     public int getId() {
         return id;
@@ -83,6 +87,14 @@ public class Cliente implements Serializable {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+    
+     public List<Animal> getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(List<Animal> animais) {
+        this.animais = animais;
     }
 
     @Override

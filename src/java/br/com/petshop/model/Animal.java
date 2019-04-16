@@ -31,7 +31,7 @@ public class Animal implements Serializable{
     
     @Column(name = "observacao")
     private String observacao;
-
+    
     public Integer getId() {
         return id;
     }

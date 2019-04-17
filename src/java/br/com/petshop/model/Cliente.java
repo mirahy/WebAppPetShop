@@ -30,9 +30,9 @@ public class Cliente implements Serializable {
     @Column(name = "endereco")
     private String endereco;
     
-    @OneToMany(mappedBy = "propietario")
-    private List<Animal> animais;
-    
+//    @OneToMany(mappedBy = "propietario")
+//    private List<Animal> animais;
+//    
     public int getId() {
         return id;
     }
@@ -89,13 +89,13 @@ public class Cliente implements Serializable {
         this.endereco = endereco;
     }
     
-     public List<Animal> getAnimais() {
-        return animais;
-    }
-
-    public void setAnimais(List<Animal> animais) {
-        this.animais = animais;
-    }
+//     public List<Animal> getAnimais() {
+//        return animais;
+//    }
+//
+//    public void setAnimais(List<Animal> animais) {
+//        this.animais = animais;
+//    }
 
     @Override
     public int hashCode() {

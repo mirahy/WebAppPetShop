@@ -10,9 +10,10 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="conteudo">
-        <h:form>
+        <h:form id="frm">
             <!--Messagens do formulário  -->
-            <p:messages autoUpdate="true" />
+            <p:messages id="msgs" />
+            
             <p:toolbar>
                 <f:facet name="left">
                     <p:commandButton value="Novo"
@@ -46,7 +47,7 @@
                              required="true"
                              value="#{clienteBean.cliente.nome}" />
                 <p:outputLabel value="RG" for="rg" />
-                <p:inputText id="rg"
+                <p:inputMask mask="999.999.999-9" id="rg"
                              required="true"
                              value="#{clienteBean.cliente.RG}" />
                 <p:outputLabel value="CPF" for="cpf" />
@@ -71,7 +72,7 @@
                                  id="salvar-button"
                                  action="#{clienteBean.salvar()}"
                                  process="cliente-dialog"
-                                 update="cliente-tabela msgs-dialog painel-dialog"
+                                 update="msgs-dialog painel-dialog"
                                  oncomplete="if(!args.validationFailed) PF('edicaoClienteDialog').hide()"/>
                 
             </h:panelGrid>

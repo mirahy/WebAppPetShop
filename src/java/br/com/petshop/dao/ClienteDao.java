@@ -28,8 +28,13 @@ public class ClienteDao implements Serializable{
         return query.getResultList();
     }
     
-    public Cliente salvar(Cliente cliente){
-        return em.merge(cliente);
+    public void salvar(Cliente cliente){
+        EntityManager em = new JPAUtil().getEntityManager();
+        em.getTransaction().begin();
+        em.merge(cliente);
+        em.getTransaction().commit();
+        em.close();
+        
     }
     
     public void excluir(Cliente cliente){

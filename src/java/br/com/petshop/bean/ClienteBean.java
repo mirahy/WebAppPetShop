@@ -7,10 +7,12 @@ import br.com.petshop.dao.JPAUtil;
 import br.com.petshop.model.Cliente;
 import br.com.petshop.service.FacesMessages;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @ViewScoped
@@ -29,8 +31,12 @@ public class ClienteBean implements Serializable{
     
     public void salvar(){
         clienteDao.salvar(this.cliente);
-        System.out.println(this.cliente.getNome());
+//        System.out.println(this.cliente.getNome());
         message.info("Cliente salvo com Sucesso!");
+        
+        RequestContext.getCurrentInstance().update(
+                Arrays.asList("frm:msgs", "frm:cliente-tabela")
+        );
     }
     
     

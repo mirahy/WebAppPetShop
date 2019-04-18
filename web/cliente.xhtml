@@ -10,23 +10,42 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="conteudo">
-        <h:form>
+        <h:form id="frm">
             <!--Messagens do formulário  -->
-            <p:messages autoUpdate="true" />
-            <p:toolbar>
+            <p:messages id="msgs" />
+            <p:toolbar id="toolbar">
                 <f:facet name="left">
                     <p:commandButton value="Novo"
                                      icon="ui-icon-document"
                                      action="#{clienteBean.prepararSalvar()}"
                                      process="@this" update="cliente-dialog"
-                                     oncomplete="PF('edicaoClienteDialog').show()"/>
+                                     oncomplete="PF('edicaoClienteDialog').show()">
+                        <p:resetInput target="cliente-dialog"/>
+                    </p:commandButton>
+                        
                     <span class="ui-separator">
                         <span class="ui-icon ui-icon-grip-dotted-vertical"/>
                     </span>
                     <p:commandButton icon="ui-icon-pencil"
-                                     title="Editar"/>
+                                     title="Editar"
+                                     process="@this" update="cliente-dialog"
+                                     oncomplete="PF('edicaoClienteDialog').show()"
+                                     disabled="#{clienteBean.clienteselecionado == null}"  >
+                    
+                        <p:resetInput target="cliente-dialog"/>
+                        <f:setPropertyActionListener value="#{clienteBean.clienteselecionado}" target="#{clienteBean.cliente}" />
+                    </p:commandButton>
                     <p:commandButton icon="ui-icon-trash"
-                                     title="Excluir"/>
+                                     process="@this"
+                                     update="cliente-tabela msgs toolbar"
+                                     action="#{clienteBean.excluir()}"
+                                     title="Excluir"  disabled="#{clienteBean.clienteselecionado == null}" >
+                    
+                        <p:confirm  icon="ui-icon-alert" header="Corfirmar Exclusão" 
+                                    message="Tem certeza que deseja excluir este cliente?" />
+                    
+                    
+                    </p:commandButton>
                 </f:facet> 
             </p:toolbar>
             <br/>
@@ -46,7 +65,7 @@
                              required="true"
                              value="#{clienteBean.cliente.nome}" />
                 <p:outputLabel value="RG" for="rg" />
-                <p:inputText id="rg"
+                <p:inputMask mask="999.999.999-9" id="rg"
                              required="true"
                              value="#{clienteBean.cliente.RG}" />
                 <p:outputLabel value="CPF" for="cpf" />
@@ -71,7 +90,7 @@
                                  id="salvar-button"
                                  action="#{clienteBean.salvar()}"
                                  process="cliente-dialog"
-                                 update="cliente-tabela msgs-dialog painel-dialog"
+                                 update="msgs-dialog painel-dialog"
                                  oncomplete="if(!args.validationFailed) PF('edicaoClienteDialog').hide()"/>
                 
             </h:panelGrid>
@@ -83,7 +102,15 @@
                          id="cliente-tabela"
                          emptyMessage="Nenhum cliente localizado"
                          rows="10"  paginator="true"
-                         paginatorPosition="bottom">
+                         paginatorPosition="bottom"
+                         selection="#{clienteBean.clienteselecionado}"
+                         selectionMode="single"   
+                         rowKey="#{cliente.id}"
+                         
+                         >
+                <p:ajax event="rowSelect" update=":frm:toolbar"  />
+                <p:ajax event="rowUnselect" update=":frm:toolbar"  />
+                
                 <p:column headerText="ID" >
                     <h:outputText value="#{cliente.id}"/>
                 </p:column>
@@ -105,7 +132,10 @@
                 <p:column headerText="Endereço" >
                     <h:outputText value="#{cliente.endereco}"/>
                 </p:column>
-            </p:dataTable>  
+            </p:dataTable> 
+            
+            
+            
         </h:form>
     </ui:define>
 

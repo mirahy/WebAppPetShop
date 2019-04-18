@@ -7,10 +7,12 @@ import br.com.petshop.dao.JPAUtil;
 import br.com.petshop.model.Cliente;
 import br.com.petshop.service.FacesMessages;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @ViewScoped
@@ -21,16 +23,49 @@ public class ClienteBean implements Serializable{
     private ClienteDao clienteDao = new ClienteDao(em);
     private Cliente cliente;
     
+    private Cliente clienteselecionado;
+    
+
+
+
+
+    
     public void prepararSalvar(){
         cliente = new Cliente();
         
     }
     
+    public void excluir(){
+    clienteDao.excluir(this.clienteselecionado);
+    this.clienteselecionado = null;
+    
+    getClientes();
+    message.info(" Cliente excluido com sucesso!");
+    
+    
+    }
     
     public void salvar(){
-        clienteDao.salvar(this.cliente);
-        System.out.println(this.cliente.getNome());
-        message.info("Cliente salvo com Sucesso!");
+        Integer id = this.cliente.getId();
+        String operacao= "";
+        if(id == 0){
+         clienteDao.salvar(this.cliente);
+       operacao = " salvo";
+        }else{
+        
+         clienteDao.alterar(this.cliente);
+       operacao=" alterado";
+        }
+        
+       
+        message.info("Cliente"+operacao+" salvo com Sucesso!");
+        
+        RequestContext.getCurrentInstance().update(
+                Arrays.asList("frm:msgs" , "frm:cliente-tabela")
+        
+        
+        );
+        
     }
     
     
@@ -45,6 +80,14 @@ public class ClienteBean implements Serializable{
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Cliente getClienteselecionado() {
+        return clienteselecionado;
+    }
+
+    public void setClienteselecionado(Cliente clienteselecionado) {
+        this.clienteselecionado = clienteselecionado;
     }
     
     

@@ -16,7 +16,7 @@
                 <property name="javax.persistence.jdbc.user" 
                           value="root"/>
                 <property name="javax.persistence.jdbc.password" 
-                          value="root"/>
+                          value=""/>
                 
                 <!--ESPECIFICAÇÃO JPA -->
                 <property name="javax.persistence.schema-generation.database.action" 

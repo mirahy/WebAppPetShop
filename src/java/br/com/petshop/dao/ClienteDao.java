@@ -30,11 +30,19 @@ public class ClienteDao implements Serializable{
     
     public void salvar(Cliente cliente){
         EntityManager em = new JPAUtil().getEntityManager();
+<<<<<<< HEAD
          
          em.getTransaction().begin();
          em.persist(cliente);
          em.getTransaction().commit();
          em.close();
+=======
+        em.getTransaction().begin();
+        em.merge(cliente);
+        em.getTransaction().commit();
+        em.close();
+        
+>>>>>>> 159af6b8eb6314c4c3a74933df37254d7f7ee2bf
     }
     
   

@@ -46,7 +46,6 @@ public class ClienteBean implements Serializable{
     }
     
     public void salvar(){
-<<<<<<< HEAD
         Integer id = this.cliente.getId();
         String operacao= "";
         if(id == 0){
@@ -67,7 +66,7 @@ public class ClienteBean implements Serializable{
         
         );
         
-=======
+
         clienteDao.salvar(this.cliente);
 //        System.out.println(this.cliente.getNome());
         message.info("Cliente salvo com Sucesso!");
@@ -75,7 +74,7 @@ public class ClienteBean implements Serializable{
         RequestContext.getCurrentInstance().update(
                 Arrays.asList("frm:msgs", "frm:cliente-tabela")
         );
->>>>>>> 159af6b8eb6314c4c3a74933df37254d7f7ee2bf
+
     }
     
     

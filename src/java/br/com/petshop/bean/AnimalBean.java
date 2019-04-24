@@ -1,9 +1,9 @@
 
 package br.com.petshop.bean;
 
-import br.com.petshop.dao.ClienteDao;
+import br.com.petshop.dao.AnimalDao;
 import br.com.petshop.dao.JPAUtil;
-import br.com.petshop.model.Cliente;
+import br.com.petshop.model.Animal;
 import br.com.petshop.service.FacesMessages;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -15,47 +15,47 @@ import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @ViewScoped
-public class ClienteBean implements Serializable{
+public class AnimalBean implements Serializable{
     private EntityManager em = new JPAUtil().getEntityManager();
     private FacesMessages message = new FacesMessages();
     
-    private ClienteDao clienteDao = new ClienteDao(em);
-    private Cliente cliente;
+    private AnimalDao animalDao = new AnimalDao(em);
+    private Animal animal;
     
-    private Cliente clienteselecionado;
+    private Animal animalselecionado;
  
     public void prepararSalvar(){
-        cliente = new Cliente();
+        animal = new Animal();
         
     }
     
     public void excluir(){
-    clienteDao.excluir(this.clienteselecionado);
-    this.clienteselecionado = null;
+    animalDao.excluir(this.animalselecionado);
+    this.animalselecionado = null;
     
-    getClientes();
-    message.info("Cliente excluido com sucesso!");
+    getAnimais();
+    message.info("Animal excluido com sucesso!");
     
     
     }
     
     public void salvar(){
-        Integer id = this.cliente.getId();
+        Integer id = this.animal.getId();
         String operacao= "";
         if(id == 0){
-         clienteDao.salvar(this.cliente);
+         animalDao.salvar(this.animal);
        operacao = " salvo";
         }else{
         
-         clienteDao.alterar(this.cliente);
+         animalDao.alterar(this.animal);
        operacao=" alterado";
         }
         
        
-        message.info("Cliente "+operacao+"  com Sucesso!");
+        message.info("Animal "+operacao+"  com Sucesso!");
         
         RequestContext.getCurrentInstance().update(
-                Arrays.asList("frm:msgs" , "frm:cliente-tabela")
+                Arrays.asList("frm:msgs" , "frm:animal-tabela")
         
         
         );
@@ -72,26 +72,28 @@ public class ClienteBean implements Serializable{
     }
     
     
-    public List<Cliente> getClientes(){
-        List<Cliente> listaClientes = clienteDao.consultarProNome("");
-        return listaClientes;
+    public List<Animal> getAnimais(){
+        List<Animal> listaAnimais = animalDao.consultarProNome("");
+        return listaAnimais;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
-    public Cliente getClienteselecionado() {
-        return clienteselecionado;
+    public Animal getAnimalselecionado() {
+        return animalselecionado;
     }
 
-    public void setClienteselecionado(Cliente clienteselecionado) {
-        this.clienteselecionado = clienteselecionado;
+    public void setAnimalselecionado(Animal animalselecionado) {
+        this.animalselecionado = animalselecionado;
     }
+
+    
     
     
 }

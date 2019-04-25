@@ -48,11 +48,11 @@
                     </p:commandButton>
                 </f:facet> 
             </p:toolbar>
-            <br/>
             
+            <br/>
             <p:dialog header="Animal"
                       widgetVar="edicaoAnimalDialog"
-                      id="cliente-dialog"
+                      id="animal-dialog"
                       resizable="false" modal="true"
                       closeOnEscape="true">
                 
@@ -64,22 +64,54 @@
                 <p:inputText id="nome"
                              required="true"
                              value="#{animalBean.animal.nome}" />
+                <p:outputLabel value="Idade" for="idade" />
+                <p:inputText id="idade"
+                             required="true"
+                             value="#{animalBean.animal.idade}" />
+                <p:outputLabel value="Peso" for="peso" />
+                <p:inputText id="peso"
+                             required="true"
+                             value="#{animalBean.animal.peso}" />
+   
+                <p:outputLabel value="Sexo" for="sexo"  />
+                <p:selectOneRadio id="sexo" unselectable="true" value="#{animalBean.animal.sexo}">
+                    <f:selectItem itemLabel="Fêmea" itemValue="Fêmea" />
+                    <f:selectItem itemLabel="Macho" itemValue="Macho" />
+                </p:selectOneRadio> 
+                
+               
+                
                 <p:outputLabel value="Raça" for="raca" />
-                <p:inputText id="raca"
-                             required="true"
-                             value="#{animalBean.animal.raca}" />
+                <p:selectOneMenu id="raca" filter="true" style="width: 160px">
+                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                    <f:selectItems value="#{animalBean.racas}"
+                                   var="raca"
+                                   itemLabel="#{raca.raca}"/>
+                </p:selectOneMenu>
+                
                 <p:outputLabel value="Porte" for="porte" />
-                <p:inputText id="porte"
-                             required="true"
-                             value="#{animalBean.animal.porte}" />
-                <p:outputLabel value="Propetario" for="propetario" />
-                <p:inputText id="propetario"
-                             required="true"
-                             value="#{animalBean.animal.propietario}" />
+                <p:selectOneMenu id="porte"  style="width: 160px">
+                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                    <f:selectItem itemLabel="Pequeno" itemValue="Pequeno"/>
+                    <f:selectItem itemLabel="Médio" itemValue="Médio"/>
+                    <f:selectItem itemLabel="Grande" itemValue="Grande"/>
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Propetário"  for="propetario" />
+                <p:selectOneMenu id="propetario" filter="true"  style="width: 160px">
+                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                    <f:selectItems value="#{animalBean.clientes}" 
+                                   var="cliente"
+                                   itemLabel="#{cliente.nome}"/>
+                </p:selectOneMenu>
+                
+                
+                
                 <p:outputLabel value="Observação" for="observacao" />
-                <p:inputText id="observacao"
+                <p:inputTextarea id="observacao"
                              required="true"
-                             value="#{animalBean.animal.observacao}"/>
+                             value="#{animalBean.animal.observacao}"
+                             style="width: 160px" />
                 
                 <h:outputLabel />
                 <p:commandButton value="Salvar"
@@ -113,14 +145,23 @@
                 <p:column headerText="NOME" width="250" sortBy="#{animal.nome}" >
                     <h:outputText value="#{animal.nome}"/>
                 </p:column>
+                <p:column headerText="IDADE" >
+                    <h:outputText value="#{animal.idade}"/>
+                </p:column>
+                <p:column headerText="PESO" >
+                    <h:outputText value="#{animal.peso}"/>
+                </p:column>
+                <p:column headerText="SEXO" >
+                    <h:outputText value="#{animal.sexo}"/>
+                </p:column>
                 <p:column headerText="RAÇA" >
-                    <h:outputText value="#{animal.raca}"/>
+                    <h:outputText value="#{animal.raca.raca}"/>
                 </p:column>
                 <p:column headerText="PORTE" >
                     <h:outputText value="#{animal.porte}"/>
                 </p:column>
                 <p:column headerText="PROPETARIO" >
-                    <h:outputText value="#{animal.propietario}"/>
+                    <h:outputText value="#{animal.propietario.nome}"/>
                 </p:column>
                 <p:column headerText="OBSERVAÇÃO" >
                     <h:outputText value="#{animal.observacao}"/>

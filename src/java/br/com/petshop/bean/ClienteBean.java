@@ -11,7 +11,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.EntityManager;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
+
 
 @ManagedBean
 @ViewScoped
@@ -54,11 +55,14 @@ public class ClienteBean implements Serializable{
        
         message.info("Cliente "+operacao+"  com Sucesso!");
         
-        RequestContext.getCurrentInstance().update(
+        PrimeFaces.current().ajax().update(
                 Arrays.asList("frm:msgs" , "frm:cliente-tabela")
-        
-        
         );
+        
+// PrimeFaces 6.1       RequestContext.getCurrentInstance().update(
+//                          Arrays.asList("frm:msgs" , "frm:cliente-tabela")
+//
+//                  );
         
 
 //        clienteDao.salvar(this.cliente);

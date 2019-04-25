@@ -17,13 +17,18 @@ public class Animal implements Serializable{
     private Integer id;
     @Column(name = "nome")
     private String nome;
+    @Column(name = "idade")
+    private Integer idade;
+    @Column(name = "peso")
+    private Double peso;
+    @Column(name = "sexo")
+    private String sexo;
+    @Column(name = "porte")
+    private String porte;
     
     @ManyToOne
     @JoinColumn(name = "raca_id")
     private Raca raca;
-    
-    @Column(name = "porte")
-    private String porte;
     
     @ManyToOne
     @JoinColumn(name = "propietario_id")
@@ -31,6 +36,7 @@ public class Animal implements Serializable{
     
     @Column(name = "observacao")
     private String observacao;
+    
     
     public Integer getId() {
         return id;
@@ -108,6 +114,30 @@ public class Animal implements Serializable{
     @Override
     public String toString() {
         return "Animal{" + "id=" + id + '}';
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
     
 }

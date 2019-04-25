@@ -17,7 +17,8 @@ public class DAO<T> {
     }
     
     public  List<T> listaTodos(){
-        EntityManager em = factoty.getEntityManager();
+        //EntityManager em = factoty.getEntityManager();
+        EntityManager em = new JPAUtil().getEntityManager();
         CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
         query.select(query.from(classe));
         

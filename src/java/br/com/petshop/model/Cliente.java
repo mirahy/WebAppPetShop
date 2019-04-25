@@ -30,9 +30,9 @@ public class Cliente implements Serializable {
     @Column(name = "endereco")
     private String endereco;
     
-//    @OneToMany(mappedBy = "propietario")
-//    private List<Animal> animais;
-//    
+    @OneToMany(mappedBy = "propietario")
+    private List<Animal> animais;
+    
     public int getId() {
         return id;
     }

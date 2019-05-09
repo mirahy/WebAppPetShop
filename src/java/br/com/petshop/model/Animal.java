@@ -31,8 +31,8 @@ public class Animal implements Serializable{
     private Raca raca;
     
     @ManyToOne
-    @JoinColumn(name = "propietario_id")
-    private Cliente propietario;
+    @JoinColumn(name = "proprietario_id")
+    private Cliente proprietario;
     
     @Column(name = "observacao")
     private String observacao;
@@ -70,12 +70,12 @@ public class Animal implements Serializable{
         this.porte = porte;
     }
 
-    public Cliente getPropietario() {
-        return propietario;
+    public Cliente getProprietario() {
+        return proprietario;
     }
 
-    public void setPropietario(Cliente propietario) {
-        this.propietario = propietario;
+    public void setProprietario(Cliente proprietario) {
+        this.proprietario = proprietario;
     }
 
     public String getObservacao() {
@@ -84,6 +84,30 @@ public class Animal implements Serializable{
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+    
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     @Override
@@ -116,28 +140,6 @@ public class Animal implements Serializable{
         return "Animal{" + "id=" + id + '}';
     }
 
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public Double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(Double peso) {
-        this.peso = peso;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
+    
     
 }

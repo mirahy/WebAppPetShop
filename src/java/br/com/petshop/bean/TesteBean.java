@@ -21,3 +21,13 @@ public class TesteBean implements Serializable{
     }
     
 }
+
+
+// vai cair no simulado das materias
+
+//o que é get, instancia
+//o que é post, proccessa
+
+//ViewScoped- 
+//ApplicationScoped- nesse caso não fecha
+//RequestScoped-

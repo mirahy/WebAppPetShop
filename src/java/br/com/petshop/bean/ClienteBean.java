@@ -22,22 +22,11 @@ public class ClienteBean implements Serializable{
     
     private ClienteDao clienteDao = new ClienteDao(em);
     private Cliente cliente;
-    
     private Cliente clienteselecionado;
  
     public void prepararSalvar(){
         cliente = new Cliente();
         
-    }
-    
-    public void excluir(){
-    clienteDao.excluir(this.clienteselecionado);
-    this.clienteselecionado = null;
-    
-    getClientes();
-    message.info("Cliente excluido com sucesso!");
-    
-    
     }
     
     public void salvar(){
@@ -58,21 +47,18 @@ public class ClienteBean implements Serializable{
         PrimeFaces.current().ajax().update(
                 Arrays.asList("frm:msgs" , "frm:cliente-tabela")
         );
-        
-// PrimeFaces 6.1       RequestContext.getCurrentInstance().update(
-//                          Arrays.asList("frm:msgs" , "frm:cliente-tabela")
-//
-//                  );
-        
 
-//        clienteDao.salvar(this.cliente);
-//        System.out.println(this.cliente.getNome());
-//        message.info("Cliente salvo com Sucesso!");
-//        
-//        RequestContext.getCurrentInstance().update(
-//                Arrays.asList("frm:msgs", "frm:cliente-tabela")
-//        );
-
+    }
+    
+    
+    public void excluir(){
+    clienteDao.excluir(this.clienteselecionado);
+    this.clienteselecionado = null;
+    
+    getClientes();
+    message.info("Cliente excluido com sucesso!");
+    
+    
     }
     
     

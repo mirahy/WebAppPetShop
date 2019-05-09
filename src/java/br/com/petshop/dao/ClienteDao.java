@@ -6,8 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-public class ClienteDao implements Serializable{
-    
+public class ClienteDao implements Serializable{    
     private EntityManager em;
 
     public ClienteDao() {
@@ -29,8 +28,7 @@ public class ClienteDao implements Serializable{
     }
     
     public void salvar(Cliente cliente){
-        EntityManager em = new JPAUtil().getEntityManager();
-         
+         EntityManager em = new JPAUtil().getEntityManager();
          em.getTransaction().begin();
          em.persist(cliente);
          em.getTransaction().commit();
@@ -39,18 +37,16 @@ public class ClienteDao implements Serializable{
     
   
      public void alterar (Cliente cliente){
-        EntityManager em = new JPAUtil().getEntityManager();
-         
+         EntityManager em = new JPAUtil().getEntityManager();
          em.getTransaction().begin();
          em.merge(cliente);
          em.getTransaction().commit();
          em.close();
     }
+     
       public void excluir(Cliente cliente){
-        EntityManager em = new JPAUtil().getEntityManager();
-         
+         EntityManager em = new JPAUtil().getEntityManager();
          em.getTransaction().begin();
-        
          em.remove( em.merge(cliente));
          em.getTransaction().commit();
          em.close();

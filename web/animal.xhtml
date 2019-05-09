@@ -26,31 +26,12 @@
                     <span class="ui-separator">
                         <span class="ui-icon ui-icon-grip-dotted-vertical"/>
                     </span>
-                    <p:commandButton icon="ui-icon-pencil"
-                                     title="Editar"
-                                     process="@this" update="animal-dialog"
-                                     oncomplete="PF('edicaoAnimalDialog').show()"
-                                     disabled="#{animalBean.animalselecionado == null}"  >
-                    
-                        <p:resetInput target="animal-dialog"/>
-                        <f:setPropertyActionListener value="#{animalBean.animalselecionado}" target="#{animalBean.animal}" />
-                    </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash"
-                                     process="@this"
-                                     update="animal-tabela msgs toolbar"
-                                     action="#{animalBean.excluir()}"
-                                     title="Excluir"  disabled="#{animalBean.animalselecionado == null}" >
-                    
-                        <p:confirm  icon="ui-icon-alert" header="Corfirmar Exclusão" 
-                                    message="Tem certeza que deseja excluir este animal?" />
-                    
-                    
-                    </p:commandButton>
+                  
                 </f:facet> 
             </p:toolbar>
             
             <br/>
-            <p:dialog header="Animal"
+            <p:dialog header="Animais"
                       widgetVar="edicaoAnimalDialog"
                       id="animal-dialog"
                       resizable="false" modal="true"
@@ -58,6 +39,8 @@
                 
                 <p:messages id="msgs-dialog" />
 
+            <!--            ADICIONAR DENTRO DO DIALOG-->
+            
             
                 <h:panelGrid columns="2" id="painel-dialog">
                 <p:outputLabel value="Nome" for="nome" />
@@ -74,44 +57,48 @@
                              value="#{animalBean.animal.peso}" />
    
                 <p:outputLabel value="Sexo" for="sexo"  />
-                <p:selectOneRadio id="sexo" unselectable="true" value="#{animalBean.animal.sexo}">
+                <p:selectOneRadio id="sexo" unselectable="true" 
+                                  value="#{animalBean.animal.sexo}">
                     <f:selectItem itemLabel="Fêmea" itemValue="Fêmea" />
                     <f:selectItem itemLabel="Macho" itemValue="Macho" />
                 </p:selectOneRadio> 
                 
-               
-                
-                <p:outputLabel value="Raça" for="raca" />
-                <p:selectOneMenu id="raca" filter="true" style="width: 160px">
-                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
-                    <f:selectItems value="#{animalBean.racas}"
-                                   var="raca"
-                                   itemLabel="#{raca.raca}"/>
-                </p:selectOneMenu>
-                
                 <p:outputLabel value="Porte" for="porte" />
-                <p:selectOneMenu id="porte"  style="width: 160px">
+                <p:selectOneMenu id="porte" value="#{animalBean.animal.porte}" style="width: 160px">
                     <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
-                    <f:selectItem itemLabel="Pequeno" itemValue="Pequeno"/>
+                    <f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
                     <f:selectItem itemLabel="Médio" itemValue="Médio"/>
                     <f:selectItem itemLabel="Grande" itemValue="Grande"/>
                 </p:selectOneMenu>
+               
+                
+                <p:outputLabel value="Raça" for="raca" />
+                <p:selectOneMenu id="raca"
+                                 value="#{animalBean.racaId}" filter="true"  style="width: 150px">
+                    <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
+                    <f:selectItems value="#{animalBean.racas}"
+                                   var="raca"
+                                   itemLabel="#{raca.raca}"
+                                   itemValue="#{raca.id}"/>
+                </p:selectOneMenu>
+                
                 
                 <p:outputLabel value="Propetário"  for="propetario" />
-                <p:selectOneMenu id="propetario" filter="true"  style="width: 160px">
+                <p:selectOneMenu id="propetario"
+                                 value="#{animalBean.proprietarioId}" filter="true"  style="width: 150px">
                     <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
                     <f:selectItems value="#{animalBean.clientes}" 
                                    var="cliente"
-                                   itemLabel="#{cliente.nome}"/>
+                                   itemLabel="#{cliente.nome}"
+                                   itemValue="#{cliente.id}"/>
                 </p:selectOneMenu>
                 
                 
                 
                 <p:outputLabel value="Observação" for="observacao" />
                 <p:inputTextarea id="observacao"
-                             required="true"
                              value="#{animalBean.animal.observacao}"
-                             style="width: 160px" />
+                             style="width: 150px" />
                 
                 <h:outputLabel />
                 <p:commandButton value="Salvar"
@@ -125,50 +112,7 @@
                 
             </p:dialog>
                 
-            <br />
-            <p:dataTable value="#{animalBean.animais}" var="animal"
-                         id="animal-tabela"
-                         emptyMessage="Nenhum animal localizado"
-                         rows="10"  paginator="true"
-                         paginatorPosition="bottom"
-                         selection="#{animalBean.animalselecionado}"
-                         selectionMode="single"   
-                         rowKey="#{animal.id}"
-                         
-                         >
-                <p:ajax event="rowSelect" update=":frm:toolbar"  />
-                <p:ajax event="rowUnselect" update=":frm:toolbar"  />
-                
-                <p:column headerText="ID" >
-                    <h:outputText value="#{animal.id}"/>
-                </p:column>
-                <p:column headerText="NOME" width="250" sortBy="#{animal.nome}" >
-                    <h:outputText value="#{animal.nome}"/>
-                </p:column>
-                <p:column headerText="IDADE" >
-                    <h:outputText value="#{animal.idade}"/>
-                </p:column>
-                <p:column headerText="PESO" >
-                    <h:outputText value="#{animal.peso}"/>
-                </p:column>
-                <p:column headerText="SEXO" >
-                    <h:outputText value="#{animal.sexo}"/>
-                </p:column>
-                <p:column headerText="RAÇA" >
-                    <h:outputText value="#{animal.raca.raca}"/>
-                </p:column>
-                <p:column headerText="PORTE" >
-                    <h:outputText value="#{animal.porte}"/>
-                </p:column>
-                <p:column headerText="PROPETARIO" >
-                    <h:outputText value="#{animal.propietario.nome}"/>
-                </p:column>
-                <p:column headerText="OBSERVAÇÃO" >
-                    <h:outputText value="#{animal.observacao}"/>
-                </p:column>
-            </p:dataTable> 
-            
-            
+  
             
         </h:form>
     </ui:define>
